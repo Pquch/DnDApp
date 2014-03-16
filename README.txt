@@ -1,1 +1,1 @@
-A simpler Javscript webapp to help Dungeon Masters
+A simple Javscript webapp to help Dungeon Masters
