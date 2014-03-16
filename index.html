@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, user-scalable=no">
 <title>D&D App</title>
 </head>
 <script type="text/javascript">
@@ -13,8 +14,9 @@ window.onload = function(){
 				while(idName.firstChild) {
     			idName.removeChild(idName.firstChild);
 			}
-			idName.appendChild(document.createTextNode(varName.value));
+			return idName.appendChild(document.createTextNode(varName.value));
 	}
+//Function That Controls Lock / Unlock Button
 	lockUnlock = function(){
 		//If Locked then
 		if(document.getElementById('unlocked')){
@@ -28,15 +30,18 @@ window.onload = function(){
 			document.getElementById('playerStatic').style.display="inline-block";
 			//translateText Calls that Take Input and Make it Into Text
 			translateText(playerName, playerNameStatic);
+			translateText(characterName, characterNameStatic);
 			translateText(armorClass, armorClassStatic);
-			
-			
+			//Translate Dropdown into Text (Need to Figure Out Function for This)
 			var baseAttack = document.getElementById('baseAttack');
 			var baseAttackNumber = baseAttack.options[baseAttack.selectedIndex].text;
 				while(baseAttackStatic.firstChild) {
-    			baseAttackStatic.removeChild(baseAttackStatic.firstChild);
+				baseAttackStatic.removeChild(baseAttackStatic.firstChild);
 				}
 			baseAttackStatic.appendChild(document.createTextNode(baseAttackNumber));
+			
+			
+
 		
 		
 		
@@ -60,7 +65,7 @@ body {
 	margin:0 auto;
 	color:#666;
 }
-div.playerCharacter {
+.playerCharacter {
 	width: 100%;
 	height:200px;
 	background-color:#CCC;
@@ -87,12 +92,34 @@ div.playerCharacter {
 	padding: 10px;
 	display: none;
 	float:left;
+	width:800px;
 }
-#playerNameStatic {
+#playerNameStatic{
+	font-size:12px;
+}
+#characterNameStatic {
 	font-size: 50px;
+	height: 57px;
+}
+#armorClassStatic {
+	background: url(images/shield.png) no-repeat;
+	font-size: 40px;
+	color: #FFF;
+	display: inline-block;
+	height: 72px;
+	width: 58px;
+	padding: 10px 0px 0px 4px;
+	margin-left: 20px;
 }
 #baseAttackStatic {
-
+	background: url(images/shield.png) no-repeat;
+	font-size: 40px;
+	color: #FFF;
+	display: inline-block;
+	height: 72px;
+	width: 58px;
+	padding: 10px 0px 0px 4px;
+	margin-left: 20px;
 }
 input[type="text"]#baseAttack{
  width:20px;
@@ -103,7 +130,8 @@ input[type="text"]#baseAttack{
     	<div id="playerForm">
                 <form>
                     Player Name:<br /><input type="text" id="playerName"><br />
-                    Armor Class:<br /><input type="text" id="armorClass" /><br />
+                    Character Name:<br /><input type="text" id="characterName"><br />
+                    Armor Class:<br /><input type="text" id="armorClass" type="numeric" pattern="\d*" /><br />
                     Base Attack:<br /><select name="baseAttack" id="baseAttack">
                                           <option value="1">+1</option>
                                           <option value="2">+2</option>
@@ -113,11 +141,9 @@ input[type="text"]#baseAttack{
                 </form>
         </div>
         <div id="playerStatic">
-        	Player Name:<br />
 			<span id="playerNameStatic"></span><br  />
-            Armor Class:<br /><br />
-            <span id="armorClassStatic"></span><br />
-            Base Attack:<br />
+			<span id="characterNameStatic"></span>
+            <div id="armorClassStatic"></div>
             <span id="baseAttackStatic"></span><br />
         </div>
     	<span class="lockButton" id="unlocked" onclick="lockUnlock()">
